@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Unlimited Bookmarklet Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1e1e1e;
+      color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: #2a2a2a;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+textarea {
+  width: 100%;
+  height: 120px;
+  background: #111;
+  color: #0f0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  font-size: 15px;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+
+button {
+  padding: 10px 20px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+.bookmarklet-box {
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 10px;
+  cursor: grab;
+  font-size: 16px;
+  text-decoration: none;
+  user-select: none;
+  margin: 8px;
+  transition: transform 0.15s;
+}
+
+.bookmarklet-box:hover {
+  transform: scale(1.05);
+}
+
+#output {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+  </style>
+</head>
+<body><h1>Unlimited Bookmarklet Generator</h1>
+<div class="container">  <textarea id="jsInput" placeholder="Write your JavaScript here..."></textarea><button onclick="generateBookmarklet()">Generate Bookmarklet</button>
+
+  <div id="output"></div>
+</div><script>
+function generateBookmarklet() {
+  let code = document.getElementById("jsInput").value.trim();
+  if (!code) {
+    alert("Please enter JavaScript first.");
+    return;
+  }
+
+  let bookmarklet = "javascript:" + encodeURIComponent(code);
+
+  let box = document.createElement("a");
+  box.className = "bookmarklet-box";
+  box.href = bookmarklet;
+  box.textContent = "Drag me!";
+
+  document.getElementById("output").appendChild(box);
+}
+</script></body>
+</html>
